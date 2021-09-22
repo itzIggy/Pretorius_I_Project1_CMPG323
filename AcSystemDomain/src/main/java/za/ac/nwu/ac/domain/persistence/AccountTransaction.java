@@ -11,4 +11,16 @@ public class AccountTransaction implements Serializable{
 
    // private static final long Serialversion =
 
+    private AccountTransaction accountNum;
+    private double transactAmount;
+    private LocalDate transactDate;
+
+    public AccountTransaction(){}
+
+    public AccountTransaction(AccountTransaction accountNum, double transactAmount, LocalDate transactDate){
+        this.accountNum = accountNum;
+        this.transactAmount = transactAmount;
+        this.transactDate = transactDate;
+    }
+
 }
