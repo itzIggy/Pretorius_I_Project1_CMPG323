@@ -15,6 +15,7 @@ public class AccountType implements Serializable{
     @Column(name = "at_TypeID", nullable = false)
     private Long at_TypeID;
 
+
     public Long getAtTypeID() {
         return at_TypeID;
     }
