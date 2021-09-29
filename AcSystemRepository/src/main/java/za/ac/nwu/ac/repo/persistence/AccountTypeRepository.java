@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 //extends JpaRepository<AccountType, Long>
 
 @Repository
-public interface AccountTypeRepository {
+public interface AccountTypeRepository{
 }

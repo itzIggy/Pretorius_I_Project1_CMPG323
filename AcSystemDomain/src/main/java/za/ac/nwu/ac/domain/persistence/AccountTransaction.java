@@ -6,10 +6,10 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 //@Entity
-//@Table(name = "ACCOUNT_TRANSACTION", schema = "DISCOVERY")
+//@Table(name = "AccountTransaction", schema = "DiscoveryProject")
 public class AccountTransaction implements Serializable{
 
-   // private static final long Serialversion =
+    //private static final long Serialversion =
 
     private AccountTransaction accountNum;
     private double transactAmount;

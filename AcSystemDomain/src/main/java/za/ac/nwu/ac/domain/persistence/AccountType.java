@@ -6,23 +6,21 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
-//@Entity
-//@Table(name = "ACCOUNT_TYPE", schema = "DISCOVERY")
+@Entity
+@Table(name = "AccountType", schema = "DiscoveryProject")
 public class AccountType implements Serializable{
 
-        private Long accountType_ID;
-        private String mnemonic;
-        private String accountType_Name;
-        private LocalDate dateCreated;
-        private Set<AccountTransaction> accountTransactionSet;
+    @Id
+    @Column(name = "accounttypeid", nullable = false)
+    private Long accounttypeid;
 
-        public AccountType(){}
+    //private static final long Serialversion =
 
-        //@Contract(pure = true)
-        public AccountType(long accountType_ID, String mnemonic, String accountType_Name, LocalDate dateCreated){
-            this.accountType_ID = accountType_ID;
-            this.mnemonic = mnemonic;
-            this.accountType_Name = accountType_Name;
-            this.dateCreated = dateCreated;
-        }
+    public Long getAccounttypeid() {
+        return accounttypeid;
+    }
+
+    public void setAccounttypeid(Long accounttypeid) {
+        this.accounttypeid = accounttypeid;
+    }
 }

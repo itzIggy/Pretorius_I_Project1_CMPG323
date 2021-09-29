@@ -36,18 +36,12 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc7</artifactId>
-            <version>12.1.0.2</version>
-            <scope>compile</scope>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.26</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>hand-china-repo</id>
-            <name>HandChinaRepo</name>
-            <url>http://nexus.saas.hand-china.com/content/repositories/rdc/</url>
-        </repository>
-    </repositories>
+
 </project>
