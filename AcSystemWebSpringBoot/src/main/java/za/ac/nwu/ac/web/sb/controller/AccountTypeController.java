@@ -19,8 +19,8 @@ public class AccountTypeController {
     //
     //    @Autowired
     //    public AccountTypeController(FetchAccountTypeFlow fetchAccountTypeFlow, @Qualifier("createAccountTypeFlowName") CreateAccountTypeFlow createAccountTypeFlow){
-    //        this.fetchAccountTypeFlow = fetchAccountTypeFlow;
-    //        this.createAccountTypeFlow = createAccountTypeFlow;
+    //            this.fetchAccountTypeFlow = fetchAccountTypeFlow;
+    //            this.createAccountTypeFlow = createAccountTypeFlow;
     //    }
 
     @GetMapping("/all")
@@ -36,15 +36,15 @@ public class AccountTypeController {
            return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
- //   @PostMapping("")
- //   @ApiOperation(value="Creates new Account Type",notes = "Create a new Account type in DB")
-  //  @ApiResponses(value = {
- //           @ApiResponse(code = 201, message = "Account Type Created Successfully", response = GeneralResponse.class),
-  //          @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-   //         @ApiResponse(code = 500, message = "Server Error", response = GeneralResponse.class)})
-  //  public ResponseEntity<GeneralResponse<AccountType>> create(
-  //          @ApiParam(value = "Request to create new account type", required = true)
-  //          @RequestBody AccountType accountType){
- //       AccountType accountTypeResponse = createAccountTypeFlow;
- //   }
+        //@PostMapping("")
+    //        @ApiOperation(value="Creates new Account Type",notes = "Create a new Account type in DB")
+    //        @ApiResponses(value = {
+    //            @ApiResponse(code = 201, message = "Account Type Created Successfully", response = GeneralResponse.class),
+    //            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+    //            @ApiResponse(code = 500, message = "Server Error", response = GeneralResponse.class)})
+    //        public ResponseEntity<GeneralResponse<AccountType>> create(
+    //            @ApiParam(value = "Request to create new account type", required = true)
+    //            @RequestBody AccountType accountType){
+    //        AccountType accountTypeResponse = createAccountTypeFlow;
+    //        }
 }
