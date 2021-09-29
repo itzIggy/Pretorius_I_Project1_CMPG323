@@ -1,59 +1,92 @@
 package za.ac.nwu.ac.domain.persistence;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "accounttype", schema = "discoveryproject")
 public class AccountType implements Serializable{
 
+    private static final long serialVersionUID = 6034186934755339239L;
     @Id
+    @SequenceGenerator(name = "discoveryproject_SEQ", sequenceName = "discoveryproject.discoveryproject_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discoveryproject_SEQ")
     @Column(name = "at_TypeID", nullable = false)
-    private Long at_TypeID;
-
-
-    public Long getAtTypeID() {
-        return at_TypeID;
-    }
-
-    public void setAtTypeID(Long accountTypeID) {
-        this.at_TypeID = accountTypeID;
-    }
+    private Long accountTypeID;
 
     @Column(name = "at_Mnemonic")
-    private String at_Mnemonic;
-
-    public String getAtMnemonic() {
-        return at_Mnemonic;
-    }
-
-    public void setAtMnemonic(String atMnemonic) {
-        this.at_Mnemonic = atMnemonic;
-    }
+    private String accountMnemonic;
 
     @Column(name = "at_Name")
-    private String at_Name;
-
-    public String getAtName() {
-        return at_Name;
-    }
-
-    public void setAtName(String atName) {
-        this.at_Name = atName;
-    }
+    private String accountName;
 
     @Column(name = "at_DateCreated")
-    private Date at_DateCreated;
+    private LocalDate accountDateCreated;
 
-    public Date getAtDateCreated() {
-        return at_DateCreated;
+    public AccountType(Long accountTypeID, String accountMnemonic, String accountName, LocalDate accountDateCreated) {
+        this.accountTypeID = accountTypeID;
+        this.accountMnemonic = accountMnemonic;
+        this.accountName = accountName;
+        this.accountDateCreated = accountDateCreated;
     }
 
-    public void setAtDateCreated(Date atDateCreated) {
-        this.at_DateCreated = atDateCreated;
+    public AccountType() {
+    }
+
+    public Long getAccountTypeID() {
+        return accountTypeID;
+    }
+
+    public void setAccountTypeID(Long accountTypeID) {
+        this.accountTypeID = accountTypeID;
+    }
+
+    public String getAccountMnemonic() {
+        return accountMnemonic;
+    }
+
+    public void setAccountMnemonic(String accountMnemonic) {
+        this.accountMnemonic = accountMnemonic;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public LocalDate getAccountDateCreated() {
+        return accountDateCreated;
+    }
+
+    public void setAccountDateCreated(LocalDate accountDateCreated) {
+        this.accountDateCreated = accountDateCreated;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AccountType that = (AccountType) o;
+        return Objects.equals(accountTypeID, that.accountTypeID) && Objects.equals(accountMnemonic, that.accountMnemonic) && Objects.equals(accountName, that.accountName) && Objects.equals(accountDateCreated, that.accountDateCreated);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountTypeID, accountMnemonic, accountName, accountDateCreated);
+    }
+
+    @Override
+    public String toString() {
+        return "AccountType{" +
+                "accountTypeID=" + accountTypeID +
+                ", accountMnemonic='" + accountMnemonic + '\'' +
+                ", accountName='" + accountName + '\'' +
+                ", accountDateCreated=" + accountDateCreated +
+                '}';
     }
 }

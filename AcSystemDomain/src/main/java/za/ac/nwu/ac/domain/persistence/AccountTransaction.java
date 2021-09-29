@@ -1,43 +1,79 @@
 package za.ac.nwu.ac.domain.persistence;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "accounttransaction", schema = "discoveryproject")
 public class AccountTransaction implements Serializable{
 
+    private static final long serialVersionUID = -1339536858857374788L;
     @Id
+    @SequenceGenerator(name = "discoveryproject_SEQ", sequenceName = "discoveryproject.discoveryproject_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discoveryproject_SEQ")
     @Column(name = "att_ID", nullable = false)
-    private Long att_ID;
-
-    public Long getAttID() {
-        return att_ID;
-    }
-
-    public void setAttID(Long accountTrans_ID) {
-        this.att_ID = accountTrans_ID;
-    }
+    private Long accountTransID;
 
     @Column(name = "att_Amount")
-    private double att_Amount;
-
-    public double getAttAmount() { return att_Amount;}
-
-    public void setAttAmount(double attAmount) {
-        this.att_Amount = attAmount;
-    }
+    private double accountTransAmount;
 
     @Column(name = "att_Date")
-    private Date att_Date;
+    private Date accountTransDate;
 
-    public Date getAttDate() { return att_Date;}
+    public AccountTransaction(Long accountTransID, double accountTransAmount, Date accountTransDate) {
+        this.accountTransID = accountTransID;
+        this.accountTransAmount = accountTransAmount;
+        this.accountTransDate = accountTransDate;
+    }
 
-    public void setAttDate(Date attDate) {
-        this.att_Date = attDate;
+    public AccountTransaction() {
+    }
+
+    public Long getAccountTransID() {
+        return accountTransID;
+    }
+
+    public void setAccountTransID(Long accountTransID) {
+        this.accountTransID = accountTransID;
+    }
+
+    public double getAccountTransAmount() {
+        return accountTransAmount;
+    }
+
+    public void setAccountTransAmount(double accountTransAmount) {
+        this.accountTransAmount = accountTransAmount;
+    }
+
+    public Date getAccountTransDate() {
+        return accountTransDate;
+    }
+
+    public void setAccountTransDate(Date accountTransDate) {
+        this.accountTransDate = accountTransDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AccountTransaction that = (AccountTransaction) o;
+        return Double.compare(that.accountTransAmount, accountTransAmount) == 0 && Objects.equals(accountTransID, that.accountTransID) && Objects.equals(accountTransDate, that.accountTransDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountTransID, accountTransAmount, accountTransDate);
+    }
+
+    @Override
+    public String toString() {
+        return "AccountTransaction{" +
+                "accountTransID=" + accountTransID +
+                ", accountTransAmount=" + accountTransAmount +
+                ", accountTransDate=" + accountTransDate +
+                '}';
     }
 }
