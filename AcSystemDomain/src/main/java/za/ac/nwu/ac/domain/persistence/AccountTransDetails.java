@@ -8,6 +8,7 @@ import java.util.Objects;
 @Table(name = "accounttransdetails", schema = "discoveryproject")
 public class AccountTransDetails implements Serializable{
 
+    private AccountTransaction accountTransaction;
 
     private static final long serialVersionUID = 7251976649032251254L;
     @Id
@@ -22,10 +23,21 @@ public class AccountTransDetails implements Serializable{
     @Column(name = "atd_NumItems")
     private int accountTransDNumItems;
 
-    public AccountTransDetails(Long accountTransDID, String accountTransDPartnerName, int accountTransDNumItems) {
+    public AccountTransDetails(Long accountTransDID, AccountTransaction accountTransaction, String accountTransDPartnerName, int accountTransDNumItems) {
         this.accountTransDID = accountTransDID;
+        this.accountTransaction = accountTransaction;
         this.accountTransDPartnerName = accountTransDPartnerName;
         this.accountTransDNumItems = accountTransDNumItems;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "att_ID")
+    public AccountTransaction getAccountTransaction() {
+        return accountTransaction;
+    }
+
+    public void setAccountTransaction(AccountTransaction accountTransaction) {
+        this.accountTransaction = accountTransaction;
     }
 
     public AccountTransDetails() {
@@ -60,18 +72,19 @@ public class AccountTransDetails implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransDetails that = (AccountTransDetails) o;
-        return accountTransDNumItems == that.accountTransDNumItems && Objects.equals(accountTransDID, that.accountTransDID) && Objects.equals(accountTransDPartnerName, that.accountTransDPartnerName);
+        return accountTransDNumItems == that.accountTransDNumItems && Objects.equals(accountTransaction, that.accountTransaction) && Objects.equals(accountTransDID, that.accountTransDID) && Objects.equals(accountTransDPartnerName, that.accountTransDPartnerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountTransDID, accountTransDPartnerName, accountTransDNumItems);
+        return Objects.hash(accountTransaction, accountTransDID, accountTransDPartnerName, accountTransDNumItems);
     }
 
     @Override
     public String toString() {
         return "AccountTransDetails{" +
-                "accountTransDID=" + accountTransDID +
+                "accountTransaction=" + accountTransaction +
+                ", accountTransDID=" + accountTransDID +
                 ", accountTransDPartnerName='" + accountTransDPartnerName + '\'' +
                 ", accountTransDNumItems=" + accountTransDNumItems +
                 '}';

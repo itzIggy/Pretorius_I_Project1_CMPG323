@@ -19,21 +19,36 @@ public class AccountTransaction implements Serializable{
     @Column(name = "att_Amount")
     private double accountTransAmount;
 
+    private AccountType accountType;
+
     @Column(name = "att_Date")
     private Date accountTransDate;
 
-    public AccountTransaction(Long accountTransID, double accountTransAmount, Date accountTransDate) {
+    public AccountTransaction(Long accountTransID, AccountType accountType, double accountTransAmount, Date accountTransDate) {
         this.accountTransID = accountTransID;
         this.accountTransAmount = accountTransAmount;
         this.accountTransDate = accountTransDate;
+        this.accountType = accountType;
     }
-
     public AccountTransaction() {
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "at_TypeID")
+    public AccountType getAccountType(){
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+
 
     public Long getAccountTransID() {
         return accountTransID;
     }
+
 
     public void setAccountTransID(Long accountTransID) {
         this.accountTransID = accountTransID;
@@ -60,12 +75,12 @@ public class AccountTransaction implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransaction that = (AccountTransaction) o;
-        return Double.compare(that.accountTransAmount, accountTransAmount) == 0 && Objects.equals(accountTransID, that.accountTransID) && Objects.equals(accountTransDate, that.accountTransDate);
+        return Double.compare(that.accountTransAmount, accountTransAmount) == 0 && Objects.equals(accountTransID, that.accountTransID) && Objects.equals(accountType, that.accountType) && Objects.equals(accountTransDate, that.accountTransDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountTransID, accountTransAmount, accountTransDate);
+        return Objects.hash(accountTransID, accountTransAmount, accountType, accountTransDate);
     }
 
     @Override
@@ -73,6 +88,7 @@ public class AccountTransaction implements Serializable{
         return "AccountTransaction{" +
                 "accountTransID=" + accountTransID +
                 ", accountTransAmount=" + accountTransAmount +
+                ", accountType=" + accountType +
                 ", accountTransDate=" + accountTransDate +
                 '}';
     }

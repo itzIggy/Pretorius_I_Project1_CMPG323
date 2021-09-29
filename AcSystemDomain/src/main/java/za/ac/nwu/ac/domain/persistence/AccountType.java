@@ -13,7 +13,7 @@ public class AccountType implements Serializable{
     @Id
     @SequenceGenerator(name = "discoveryproject_SEQ", sequenceName = "discoveryproject.discoveryproject_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discoveryproject_SEQ")
-    @Column(name = "at_TypeID", nullable = false)
+    @Column(name = "at_TypeID")
     private Long accountTypeID;
 
     @Column(name = "at_Mnemonic")
