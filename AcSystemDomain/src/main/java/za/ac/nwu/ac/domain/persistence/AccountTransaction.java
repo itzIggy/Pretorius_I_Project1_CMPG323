@@ -10,18 +10,10 @@ import java.util.Objects;
 public class AccountTransaction implements Serializable{
 
     private static final long serialVersionUID = -1339536858857374788L;
-    @Id
-    @SequenceGenerator(name = "discoveryproject_SEQ", sequenceName = "discoveryproject.discoveryproject_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discoveryproject_SEQ")
-    @Column(name = "att_ID", nullable = false)
+
     private Long accountTransID;
-
-    @Column(name = "att_Amount")
     private double accountTransAmount;
-
     private AccountType accountType;
-
-    @Column(name = "att_Date")
     private Date accountTransDate;
 
     public AccountTransaction(Long accountTransID, AccountType accountType, double accountTransAmount, Date accountTransDate) {
@@ -31,6 +23,18 @@ public class AccountTransaction implements Serializable{
         this.accountType = accountType;
     }
     public AccountTransaction() {
+    }
+
+    @Id
+    @SequenceGenerator(name = "discoveryproject_SEQ", sequenceName = "discoveryproject.discoveryproject_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discoveryproject_SEQ")
+    @Column(name = "att_ID", nullable = false)
+    public Long getAccountTransID() {
+        return accountTransID;
+    }
+
+    public void setAccountTransID(Long accountTransID) {
+        this.accountTransID = accountTransID;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -43,17 +47,7 @@ public class AccountTransaction implements Serializable{
         this.accountType = accountType;
     }
 
-
-
-    public Long getAccountTransID() {
-        return accountTransID;
-    }
-
-
-    public void setAccountTransID(Long accountTransID) {
-        this.accountTransID = accountTransID;
-    }
-
+    @Column(name = "att_Amount")
     public double getAccountTransAmount() {
         return accountTransAmount;
     }
@@ -62,6 +56,7 @@ public class AccountTransaction implements Serializable{
         this.accountTransAmount = accountTransAmount;
     }
 
+    @Column(name = "att_Date")
     public Date getAccountTransDate() {
         return accountTransDate;
     }

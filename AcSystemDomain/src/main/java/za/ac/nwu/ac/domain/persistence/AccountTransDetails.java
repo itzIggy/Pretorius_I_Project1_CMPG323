@@ -8,19 +8,13 @@ import java.util.Objects;
 @Table(name = "accounttransdetails", schema = "discoveryproject")
 public class AccountTransDetails implements Serializable{
 
-    private AccountTransaction accountTransaction;
+
 
     private static final long serialVersionUID = 7251976649032251254L;
-    @Id
-    @SequenceGenerator(name = "discoveryproject_SEQ", sequenceName = "discoveryproject.discoveryproject_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discoveryproject_SEQ")
-    @Column(name = "atd_ID", nullable = false)
+
+    private AccountTransaction accountTransaction;
     private Long accountTransDID;
-
-    @Column(name = "atd_PartnerName")
     private String accountTransDPartnerName;
-
-    @Column(name = "atd_NumItems")
     private int accountTransDNumItems;
 
     public AccountTransDetails(Long accountTransDID, AccountTransaction accountTransaction, String accountTransDPartnerName, int accountTransDNumItems) {
@@ -28,6 +22,9 @@ public class AccountTransDetails implements Serializable{
         this.accountTransaction = accountTransaction;
         this.accountTransDPartnerName = accountTransDPartnerName;
         this.accountTransDNumItems = accountTransDNumItems;
+    }
+
+    public AccountTransDetails() {
     }
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -40,9 +37,10 @@ public class AccountTransDetails implements Serializable{
         this.accountTransaction = accountTransaction;
     }
 
-    public AccountTransDetails() {
-    }
-
+    @Id
+    @SequenceGenerator(name = "discoveryproject_SEQ", sequenceName = "discoveryproject.discoveryproject_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discoveryproject_SEQ")
+    @Column(name = "atd_ID", nullable = false)
     public Long getAccountTransDID() {
         return accountTransDID;
     }
@@ -51,14 +49,14 @@ public class AccountTransDetails implements Serializable{
         this.accountTransDID = accountTransDID;
     }
 
+    @Column(name = "atd_PartnerName")
     public String getAccountTransDPartnerName() {
         return accountTransDPartnerName;
     }
 
-    public void setAccountTransDPartnerName(String accountTransDPartnerName) {
-        this.accountTransDPartnerName = accountTransDPartnerName;
-    }
+    public void setAccountTransDPartnerName(String accountTransDPartnerName) {this.accountTransDPartnerName = accountTransDPartnerName;}
 
+    @Column(name = "atd_NumItems")
     public int getAccountTransDNumItems() {
         return accountTransDNumItems;
     }

@@ -4,26 +4,20 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "accounttype", schema = "discoveryproject")
 public class AccountType implements Serializable{
 
     private static final long serialVersionUID = 6034186934755339239L;
-    @Id
-    @SequenceGenerator(name = "discoveryproject_SEQ", sequenceName = "discoveryproject.discoveryproject_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discoveryproject_SEQ")
-    @Column(name = "at_TypeID")
+
     private Long accountTypeID;
-
-    @Column(name = "at_Mnemonic")
     private String accountMnemonic;
-
-    @Column(name = "at_Name")
     private String accountName;
-
-    @Column(name = "at_DateCreated")
     private LocalDate accountDateCreated;
+
+    private Set<AccountTransaction> accountTransactions;
 
     public AccountType(Long accountTypeID, String accountMnemonic, String accountName, LocalDate accountDateCreated) {
         this.accountTypeID = accountTypeID;
@@ -35,36 +29,47 @@ public class AccountType implements Serializable{
     public AccountType() {
     }
 
+    @Id
+    @SequenceGenerator(name = "discoveryproject_SEQ", sequenceName = "discoveryproject.discoveryproject_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discoveryproject_SEQ")
+    @Column(name = "at_TypeID")
     public Long getAccountTypeID() {
         return accountTypeID;
     }
-
     public void setAccountTypeID(Long accountTypeID) {
         this.accountTypeID = accountTypeID;
     }
 
+    @Column(name = "at_Mnemonic")
     public String getAccountMnemonic() {
         return accountMnemonic;
     }
-
     public void setAccountMnemonic(String accountMnemonic) {
         this.accountMnemonic = accountMnemonic;
     }
 
+    @Column(name = "at_Name")
     public String getAccountName() {
         return accountName;
     }
-
     public void setAccountName(String accountName) {
         this.accountName = accountName;
     }
 
+    @Column(name = "at_DateCreated")
     public LocalDate getAccountDateCreated() {
         return accountDateCreated;
     }
-
     public void setAccountDateCreated(LocalDate accountDateCreated) {
         this.accountDateCreated = accountDateCreated;
+    }
+
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType",orphanRemoval = true,cascade = CascadeType.PERSIST)
+    public Set<AccountTransaction> getAccountTransactions(){
+        return accountTransactions;
+    }
+    public void setAccountTransactions(Set<AccountTransaction> accountTransactions) {
+        this.accountTransactions = accountTransactions;
     }
 
     @Override
@@ -72,7 +77,7 @@ public class AccountType implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountType that = (AccountType) o;
-        return Objects.equals(accountTypeID, that.accountTypeID) && Objects.equals(accountMnemonic, that.accountMnemonic) && Objects.equals(accountName, that.accountName) && Objects.equals(accountDateCreated, that.accountDateCreated);
+        return accountTypeID.equals(that.accountTypeID) && accountMnemonic.equals(that.accountMnemonic) && accountName.equals(that.accountName) && accountDateCreated.equals(that.accountDateCreated);
     }
 
     @Override
