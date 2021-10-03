@@ -1,1 +1,3 @@
 za\ac\nwu\ac\Translator\config\TranslatorConfig.class
+za\ac\nwu\ac\Translator\AccountTypeTranslator.class
+za\ac\nwu\ac\Translator\flow\AccountTypeTranslatorFlow.class
