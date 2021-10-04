@@ -2,7 +2,7 @@ package za.ac.nwu.ac.domain.persistence;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -14,13 +14,15 @@ public class AccountTransaction implements Serializable{
     private Long accountTransID;
     private double accountTransAmount;
     private AccountType accountType;
-    private Date accountTransDate;
+    private Long memberID;
+    private LocalDate accountTransDate;
 
-    public AccountTransaction(Long accountTransID, AccountType accountType, double accountTransAmount, Date accountTransDate) {
+    public AccountTransaction(Long accountTransID,Long memberID, AccountType accountType, double accountTransAmount, LocalDate accountTransDate) {
         this.accountTransID = accountTransID;
         this.accountTransAmount = accountTransAmount;
         this.accountTransDate = accountTransDate;
         this.accountType = accountType;
+        this.memberID = memberID;
     }
     public AccountTransaction() {
     }
@@ -57,12 +59,20 @@ public class AccountTransaction implements Serializable{
     }
 
     @Column(name = "att_Date")
-    public Date getAccountTransDate() {
+    public LocalDate getAccountTransDate() {
         return accountTransDate;
     }
 
-    public void setAccountTransDate(Date accountTransDate) {
+    public void setAccountTransDate(LocalDate accountTransDate) {
         this.accountTransDate = accountTransDate;
+    }
+
+    @Column(name = "att_memberID")
+    public Long getMemberID() {
+        return memberID;
+    }
+    public void setMemberID(Long memberID) {
+        this.memberID = memberID;
     }
 
     @Override
@@ -70,12 +80,12 @@ public class AccountTransaction implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransaction that = (AccountTransaction) o;
-        return Double.compare(that.accountTransAmount, accountTransAmount) == 0 && Objects.equals(accountTransID, that.accountTransID) && Objects.equals(accountType, that.accountType) && Objects.equals(accountTransDate, that.accountTransDate);
+        return Double.compare(that.accountTransAmount, accountTransAmount) == 0 && accountTransID.equals(that.accountTransID) && accountType.equals(that.accountType) && memberID.equals(that.memberID) && accountTransDate.equals(that.accountTransDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountTransID, accountTransAmount, accountType, accountTransDate);
+        return Objects.hash(accountTransID, accountTransAmount, accountType, memberID, accountTransDate);
     }
 
     @Override
@@ -84,6 +94,7 @@ public class AccountTransaction implements Serializable{
                 "accountTransID=" + accountTransID +
                 ", accountTransAmount=" + accountTransAmount +
                 ", accountType=" + accountType +
+                ", memberID=" + memberID +
                 ", accountTransDate=" + accountTransDate +
                 '}';
     }
