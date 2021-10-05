@@ -19,6 +19,9 @@ public class AccountType implements Serializable{
 
     private Set<AccountTransaction> accountTransactions;
 
+    public AccountType() {
+    }
+
     public AccountType(Long accountTypeID, String accountMnemonic, String accountName, LocalDate accountDateCreated) {
         this.accountTypeID = accountTypeID;
         this.accountMnemonic = accountMnemonic;
@@ -26,7 +29,10 @@ public class AccountType implements Serializable{
         this.accountDateCreated = accountDateCreated;
     }
 
-    public AccountType() {
+    public AccountType(String accountMnemonic, String accountName, LocalDate accountDateCreated) {
+        this.accountMnemonic = accountMnemonic;
+        this.accountName = accountName;
+        this.accountDateCreated =accountDateCreated;
     }
 
     @Id

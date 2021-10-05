@@ -18,12 +18,11 @@ public class CreateAccountType implements CreateAccountTypeFlow {
         this.accountTypeTranslator = accountTypeTranslator;
     }
 
-    //@Override
+    @Override
     public AccountTypeDto create(AccountTypeDto accountTypeDto){
        if(null == accountTypeDto.getCreationDate()){
             accountTypeDto.setCreationDate(LocalDate.now());
         }
-        //return accountTypeTranslator.create(accountTypeDto);
-        return null;
+        return accountTypeTranslator.create(accountTypeDto);
     }
 }
