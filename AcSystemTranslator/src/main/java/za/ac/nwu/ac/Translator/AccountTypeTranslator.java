@@ -8,4 +8,6 @@ public interface AccountTypeTranslator {
     List<AccountTypeDto> getAllAccountTypes();
 
     AccountTypeDto create(AccountTypeDto accountTypeDto);
+
+    AccountTypeDto getAccountTypeByMnemonic(String mnemonic);
 }

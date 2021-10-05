@@ -13,7 +13,7 @@ public class AccountType implements Serializable{
     private static final long serialVersionUID = 6034186934755339239L;
 
     private Long accountTypeID;
-    private String accountMnemonic;
+    private String mnemonic;
     private String accountName;
     private LocalDate accountDateCreated;
 
@@ -22,15 +22,15 @@ public class AccountType implements Serializable{
     public AccountType() {
     }
 
-    public AccountType(Long accountTypeID, String accountMnemonic, String accountName, LocalDate accountDateCreated) {
+    public AccountType(Long accountTypeID, String mnemonic, String accountName, LocalDate accountDateCreated) {
         this.accountTypeID = accountTypeID;
-        this.accountMnemonic = accountMnemonic;
+        this.mnemonic = mnemonic;
         this.accountName = accountName;
         this.accountDateCreated = accountDateCreated;
     }
 
-    public AccountType(String accountMnemonic, String accountName, LocalDate accountDateCreated) {
-        this.accountMnemonic = accountMnemonic;
+    public AccountType(String mnemonic, String accountName, LocalDate accountDateCreated) {
+        this.mnemonic = mnemonic;
         this.accountName = accountName;
         this.accountDateCreated =accountDateCreated;
     }
@@ -48,10 +48,10 @@ public class AccountType implements Serializable{
 
     @Column(name = "at_Mnemonic")
     public String getAccountMnemonic() {
-        return accountMnemonic;
+        return mnemonic;
     }
-    public void setAccountMnemonic(String accountMnemonic) {
-        this.accountMnemonic = accountMnemonic;
+    public void setAccountMnemonic(String mnemonic) {
+        this.mnemonic = mnemonic;
     }
 
     @Column(name = "at_Name")
@@ -83,19 +83,19 @@ public class AccountType implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountType that = (AccountType) o;
-        return accountTypeID.equals(that.accountTypeID) && accountMnemonic.equals(that.accountMnemonic) && accountName.equals(that.accountName) && accountDateCreated.equals(that.accountDateCreated);
+        return accountTypeID.equals(that.accountTypeID) && mnemonic.equals(that.mnemonic) && accountName.equals(that.accountName) && accountDateCreated.equals(that.accountDateCreated);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountTypeID, accountMnemonic, accountName, accountDateCreated);
+        return Objects.hash(accountTypeID, mnemonic, accountName, accountDateCreated);
     }
 
     @Override
     public String toString() {
         return "AccountType{" +
                 "accountTypeID=" + accountTypeID +
-                ", accountMnemonic='" + accountMnemonic + '\'' +
+                ", accountMnemonic='" + mnemonic + '\'' +
                 ", accountName='" + accountName + '\'' +
                 ", accountDateCreated=" + accountDateCreated +
                 '}';
