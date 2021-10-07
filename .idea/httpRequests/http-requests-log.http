@@ -1,0 +1,40 @@
+GET http://localhost:8090/account-type/mvc/ping
+
+<> 2021-10-07T003417.404.html
+
+###
+
+GET http://localhost:8090/mvc/account-type/ping
+
+<> 2021-10-07T003401.404.html
+
+###
+
+GET http://localhost:8090/account-type/ping
+
+<> 2021-10-07T003322.404.html
+
+###
+
+GET http://localhost:8090/account-type/ping
+
+###
+
+GET http://localhost:8090/account-type/ping
+
+###
+
+GET http://localhost:8090/account-type/ping
+
+<> 2021-10-07T003016.404.html
+
+###
+
+GET http://account-type/
+
+###
+
+GET http://account-type
+
+###
+
