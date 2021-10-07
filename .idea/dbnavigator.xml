@@ -24,22 +24,18 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="f9647037-c99b-4322-833e-28706faa4014">
-        <schema name="discoveryproject" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="f9647037-c99b-4322-833e-28706faa4014">
-      <console name="MyConnection" type="STANDARD" schema="mysql" session="Main" />
+    <connection id="c3c02801-adf9-476b-9ff4-d24ec143aa15">
+      <console name="RealConnection" type="STANDARD" schema="mysql" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="f9647037-c99b-4322-833e-28706faa4014" />
+    <connection id="c3c02801-adf9-476b-9ff4-d24ec143aa15" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -67,23 +63,23 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="f9647037-c99b-4322-833e-28706faa4014" active="true">
+      <connection id="c3c02801-adf9-476b-9ff4-d24ec143aa15" active="true">
         <database>
-          <name value="MyConnection" />
+          <name value="RealConnection" />
           <description value="" />
           <database-type value="MYSQL" />
           <config-type value="BASIC" />
-          <database-version value="5.5" />
+          <database-version value="8.0" />
           <driver-source value="BUILTIN" />
-          <driver-library value="" />
+          <driver-library value="C:\NWU\Projects\AcSystemRepository\src\main\resources\demo\src" />
           <driver value="" />
           <url-type value="DATABASE" />
           <host value="localhost" />
           <port value="3306" />
           <database value="mysql" />
-          <type value="USER" />
-          <user value="root" />
-          <deprecated-pwd value="" />
+          <type value="USER_PASSWORD" />
+          <user value="ivanDatabase" />
+          <deprecated-pwd value="SXZhblByZQ==" />
         </database>
         <properties>
           <auto-commit value="false" />

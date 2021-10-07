@@ -1,13 +1,14 @@
-package za.ac.nwu.ac.Translator;
+package za.ac.nwu.ac.translator;
 
 import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 
 import java.util.List;
 
+
 public interface AccountTypeTranslator {
     List<AccountTypeDto> getAllAccountTypes();
 
-    AccountTypeDto create(AccountTypeDto accountTypeDto);
+    /*AccountTypeDto create(AccountTypeDto accountTypeDto);*/
 
-    AccountTypeDto getAccountTypeByMnemonic(String mnemonic);
+    /*AccountTypeDto getAccountTypeByMnemonic(String mnemonic);*/
 }

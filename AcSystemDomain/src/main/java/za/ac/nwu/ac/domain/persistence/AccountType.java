@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "accounttype", schema = "discoveryproject")
+@Table(name = "accounttype", schema = "accountsystem")
 public class AccountType implements Serializable{
 
     private static final long serialVersionUID = 6034186934755339239L;
@@ -36,9 +36,9 @@ public class AccountType implements Serializable{
     }
 
     @Id
-    @SequenceGenerator(name = "discoveryproject_SEQ", sequenceName = "discoveryproject.discoveryproject_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discoveryproject_SEQ")
-    @Column(name = "at_TypeID")
+    @SequenceGenerator(name = "accountsystem_SEQ", sequenceName = "accountsystem.accountsystem_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accountsystem_SEQ")
+    @Column(name = "Id")
     public Long getAccountTypeID() {
         return accountTypeID;
     }
@@ -46,7 +46,7 @@ public class AccountType implements Serializable{
         this.accountTypeID = accountTypeID;
     }
 
-    @Column(name = "at_Mnemonic")
+    @Column(name = "mnemonic")
     public String getAccountMnemonic() {
         return mnemonic;
     }
@@ -54,7 +54,7 @@ public class AccountType implements Serializable{
         this.mnemonic = mnemonic;
     }
 
-    @Column(name = "at_Name")
+    @Column(name = "name")
     public String getAccountName() {
         return accountName;
     }
@@ -62,7 +62,7 @@ public class AccountType implements Serializable{
         this.accountName = accountName;
     }
 
-    @Column(name = "at_DateCreated")
+    @Column(name = "creationDate")
     public LocalDate getAccountDateCreated() {
         return accountDateCreated;
     }
@@ -83,19 +83,19 @@ public class AccountType implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountType that = (AccountType) o;
-        return accountTypeID.equals(that.accountTypeID) && mnemonic.equals(that.mnemonic) && accountName.equals(that.accountName) && accountDateCreated.equals(that.accountDateCreated);
+        return accountTypeID.equals(that.accountTypeID) && mnemonic.equals(that.mnemonic) && accountName.equals(that.accountName) && Objects.equals(accountDateCreated, that.accountDateCreated) && accountTransactions.equals(that.accountTransactions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountTypeID, mnemonic, accountName, accountDateCreated);
+        return Objects.hash(accountTypeID, mnemonic, accountName, accountDateCreated, accountTransactions);
     }
 
     @Override
     public String toString() {
         return "AccountType{" +
                 "accountTypeID=" + accountTypeID +
-                ", accountMnemonic='" + mnemonic + '\'' +
+                ", mnemonic='" + mnemonic + '\'' +
                 ", accountName='" + accountName + '\'' +
                 ", accountDateCreated=" + accountDateCreated +
                 '}';

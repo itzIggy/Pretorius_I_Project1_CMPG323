@@ -9,9 +9,10 @@
         <artifactId>AcSystem</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <packaging>war</packaging>
 
     <artifactId>AcSystemWebSpringBoot</artifactId>
-    <packaging>war</packaging>
+
 
     <dependencies>
         <dependency>
@@ -27,6 +28,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
@@ -51,6 +56,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.5.5</version>
             </plugin>
         </plugins>
     </build>

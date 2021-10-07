@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @ApiModel(value = "AccountType", description = "DTO AccountType")
-
 public class AccountTypeDto implements Serializable{
 
     private static final long serialVersionUID = -7731154715176897719L;
