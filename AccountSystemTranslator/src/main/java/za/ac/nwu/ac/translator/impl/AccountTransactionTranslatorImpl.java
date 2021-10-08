@@ -36,14 +36,14 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
         return accountTransactions;
     }
 
-    public AccountTransactionDto getAccountTransactionByMemberID(Long memberID) {
+    /*public AccountTransactionDto getAccountTransactionByMemberID(Long memberID) {
         try{
             AccountTransaction accountTransaction = accountTransactionRepository.getAccountTransactionByMemberID(memberID);
             return new AccountTransactionDto(accountTransaction);
         }catch (Exception e){
-            throw new RuntimeException("Unable to save to DB");
+            throw new RuntimeException("Unable to read from DB!");
         }
-    }
+    }*/
 
     @Override
     public AccountTransactionDto createTransaction(AccountTransactionDto accountTransactionDto) {

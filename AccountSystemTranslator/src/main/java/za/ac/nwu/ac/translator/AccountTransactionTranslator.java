@@ -7,7 +7,7 @@ import java.util.List;
 public interface AccountTransactionTranslator {
     List<AccountTransactionDto> getAllAccountTransactions();
 
-    AccountTransactionDto getAccountTransactionByMemberID(Long memberID);
+    /*AccountTransactionDto getAccountTransactionByMemberID(Long memberID);*/
 
     AccountTransactionDto createTransaction(AccountTransactionDto accountTransactionDto);
 }

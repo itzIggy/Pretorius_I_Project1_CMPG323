@@ -17,19 +17,14 @@ public class AccountType implements Serializable{
     private String accountTypeName;
     private LocalDate creationDate;
 
+
     private Set<AccountTransaction> accountTransactions;
 
     public AccountType() {
 
     }
 
-    public AccountType(AccountType accountType)
-    {
-        this.accountTypeId = accountType.accountTypeId;
-    }
-
     public AccountType(Long accountTypeId, String mnemonic, String accountTypeName, LocalDate creationDate){
-
         this.accountTypeId = accountTypeId;
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
@@ -40,12 +35,12 @@ public class AccountType implements Serializable{
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
         this.creationDate =creationDate;
+        this.accountTypeId =accountTypeId;
     }
 
     @Id
-    @SequenceGenerator(name = "accountsystem_SEQ", sequenceName = "accountsystem.accountsystem_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accountsystem_SEQ")
-    @Column(name = "Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "accountTypeID",insertable = true,updatable = true)
     public Long getAccountTypeId() {
         return accountTypeId;
     }
@@ -65,14 +60,11 @@ public class AccountType implements Serializable{
         return creationDate;
     }
 
-    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType")
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType",cascade = CascadeType.ALL)
     public Set<AccountTransaction> getAccountTransactions() {
         return accountTransactions;
     }
 
-    public void setAccountTransActions(Set<AccountTransaction> accountTransActions){
-        this.accountTransactions = accountTransActions;
-    }
 
     public void setAccountTypeId(Long accountTypeId) {
         this.accountTypeId = accountTypeId;

@@ -58,13 +58,23 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator{
         }
     }
 
-    /*@Override
+   /* @Override
     public AccountTypeDto modifyAccountType(AccountTypeDto accountTypeDto) {
         try{
             AccountType accountType = accountTypeRepository.modifyAccountType(accountTypeDto);
             return new AccountTypeDto(accountType);
         }catch (Exception e){
             throw new RuntimeException("Unable to read from DB");
+        }
+    }*/
+
+   /* @Override
+    public AccountType removeAccountTypeByMnemonic(String mnemonic){
+        try{
+            AccountType accountType = accountTypeRepository;
+            return new AccountTypeDto(accountType);
+        }catch (Exception e){
+            throw new RuntimeException("Unable to delete from DB!");
         }
     }*/
 }

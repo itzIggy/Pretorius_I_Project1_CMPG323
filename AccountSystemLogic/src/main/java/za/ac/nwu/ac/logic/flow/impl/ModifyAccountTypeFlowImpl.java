@@ -24,7 +24,6 @@ public class ModifyAccountTypeFlowImpl implements ModifyAccountTypeFlow {
     /*@Override
     public AccountTypeDto modifyAccountType(AccountTypeDto accountTypeDto){
         return accountTypeTranslator.modifyAccountType(accountTypeDto);
-    }    */
-
+    }*/
 
 }

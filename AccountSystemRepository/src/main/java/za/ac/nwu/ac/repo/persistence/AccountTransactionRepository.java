@@ -7,11 +7,11 @@ import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 
 @Repository
 public interface AccountTransactionRepository extends JpaRepository<AccountTransaction, Long> {
-    @Query(value = "SELECT         " +
-            "        at" +
-            "        FROM          " +
+    /*@Query(value = "SELECT             " +
+            "        at           " +
+            "        FROM              " +
             "        AccountTransaction" +
-            "        at            " +
+            "        at                " +
             "WHERE at.memberID = :memberID" )
-    AccountTransaction getAccountTransactionByMemberID(Long memberID);
+    AccountTransaction getAccountTransactionByMemberID(Long memberID);*/
 }

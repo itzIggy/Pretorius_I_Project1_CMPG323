@@ -3,6 +3,7 @@ package za.ac.nwu.ac.domain.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import za.ac.nwu.ac.domain.persistence.AccountMember;
 import za.ac.nwu.ac.domain.persistence.AccountType;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ public class AccountTypeDto implements Serializable {
 
     private static final long serialVersionUID = 2538138663972118712L;
 
+    private Long accountTypeId;
     private String mnemonic;
     private String accountTypeName;
     private LocalDate creationDate;
@@ -22,18 +24,36 @@ public class AccountTypeDto implements Serializable {
     }
 
     public AccountTypeDto(AccountType accountTypeDto) {
+        this.setAccountTypeId(accountTypeDto.getAccountTypeId());
         this.setMnemonic(accountTypeDto.getMnemonic());
         this.setAccountTypeName(accountTypeDto.getAccountTypeName());
         this.setCreationDate(accountTypeDto.getCreationDate());
     }
 
-    public AccountTypeDto(String mnemonic, String accountTypeName, LocalDate creationDate) {
+    public AccountTypeDto(Long accountTypeId,String mnemonic, String accountTypeName, LocalDate creationDate) {
+        this.accountTypeId=accountTypeId;
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
         this.creationDate = creationDate;
     }
 
-    @ApiModelProperty(position = 2,
+    @ApiModelProperty(position = 1,
+            value = "AccountType ID",
+            name = "ID",
+            notes = "Identifies Account type by ID",
+            dataType = "java.lang.Integer",
+            example = "1",
+            allowEmptyValue = false,
+            required = true)
+    public Long getAccountTypeId() {
+        return accountTypeId;
+    }
+
+    public void setAccountTypeId(Long accountTypeId) {
+        this.accountTypeId = accountTypeId;
+    }
+
+    @ApiModelProperty(position = 3,
             value = "AccountType Name",
             name = "Name",
             notes = "Identifies Account type name",
@@ -49,7 +69,7 @@ public class AccountTypeDto implements Serializable {
         this.accountTypeName = accountTypeName;
     }
 
-    @ApiModelProperty(position = 3,
+    @ApiModelProperty(position = 4,
             value = "AccountType Date Created",
             name = "CreationDate",
             notes = "Identifies Account type creation Date",
@@ -64,7 +84,7 @@ public class AccountTypeDto implements Serializable {
         this.creationDate = creationDate;
     }
 
-    @ApiModelProperty(position = 1,
+    @ApiModelProperty(position = 2,
     value = "AccountType Mnemonic",
     name = "Mnemonic",
     notes = "Identifies Account type",
@@ -84,23 +104,24 @@ public class AccountTypeDto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTypeDto that = (AccountTypeDto) o;
-        return Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTypeName, that.accountTypeName) && Objects.equals(creationDate, that.creationDate);
-    }
-
-    @JsonIgnore
-    public AccountType getAccountType(){
-        return new AccountType(getMnemonic(),getAccountTypeName(),getCreationDate());
+        return Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTypeName, that.accountTypeName) && Objects.equals(creationDate, that.creationDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mnemonic, accountTypeName, creationDate);
+        return Objects.hash(accountTypeId, mnemonic, accountTypeName, creationDate);
+    }
+
+    @JsonIgnore
+    public AccountType getAccountType(){
+        return new AccountType(getAccountTypeId(),getMnemonic(),getAccountTypeName(),getCreationDate());
     }
 
     @Override
     public String toString() {
         return "AccountTypeDto{" +
-                "mnemonic='" + mnemonic + '\'' +
+                "accountTypeId=" + accountTypeId +
+                ", mnemonic='" + mnemonic + '\'' +
                 ", accountTypeName='" + accountTypeName + '\'' +
                 ", creationDate=" + creationDate +
                 '}';

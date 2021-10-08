@@ -81,17 +81,17 @@ public class AccountTypeController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    /*@PutMapping("")
-    @ApiOperation(value = "Modifies Account type",notes = "Modifies account type")
+    /*@PutMapping("/modifyAccountType")
+    @ApiOperation(value = "Modifies Account type",notes = "Modifies an account type")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Account type Found"),
+            @ApiResponse(code = 200, message = "Account type Found",response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 404, message = "Not found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
     public ResponseEntity<GeneralResponse<AccountTypeDto>> modifyAccount(
             @ApiParam(value = "Request to modify account type", required = true)
             @RequestBody AccountTypeDto accountType){
-        AccountTypeDto accountTypeDto = fetchAccountTypeFlow.modifyAccountType(accountType);
+        AccountTypeDto accountTypeDto = modifyAccountTypeFlow.modifyAccountType(accountType);
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true,accountTypeDto);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }*/

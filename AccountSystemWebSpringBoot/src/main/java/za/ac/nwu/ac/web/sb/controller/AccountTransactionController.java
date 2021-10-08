@@ -59,7 +59,7 @@ public class AccountTransactionController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("{memberID}")
+    /*@GetMapping("{memberID}")
     @ApiOperation(value = "Gets Specific account transaction", notes = "Fetches account transaction by MemberID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account transaction Found"),
@@ -75,5 +75,5 @@ public class AccountTransactionController {
         AccountTransactionDto accountTransactionDto = fetchAccountTransactionFlow.getAccountTransactionByMemberID(memberID);
         GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransactionDto);
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+    }*/
 }
