@@ -10,7 +10,6 @@ import za.ac.nwu.ac.translator.AccountTypeTranslator;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @Transactional
@@ -69,13 +68,12 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator{
         }
     }
 
-    /*@Override
-    public AccountTypeDto removeAccountTypeByID(Integer accountTypeID){
+    @Override
+    public void removeAccountTypeByID(Long accountTypeID){
         try{
-            AccountType accountType = accountTypeRepository.deleteById(accountTypeID);
-            return new AccountTypeDto(accountType);
+            accountTypeRepository.deleteById(accountTypeID);
         }catch (Exception e){
             throw new RuntimeException("Unable to delete from DB!");
         }
-    }*/
+    }
 }

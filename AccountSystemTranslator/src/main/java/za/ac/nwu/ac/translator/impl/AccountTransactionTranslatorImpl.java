@@ -1,12 +1,9 @@
 package za.ac.nwu.ac.translator.impl;
 
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
-import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.domain.persistence.AccountTransaction;
-import za.ac.nwu.ac.domain.persistence.AccountType;
 import za.ac.nwu.ac.repo.persistence.AccountTransactionRepository;
 import za.ac.nwu.ac.translator.AccountTransactionTranslator;
 
@@ -38,6 +35,7 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
 
         return accountTransactions;
     }
+
     @Override
     public List<AccountTransactionDto> getAccountTransactionByMemberID(Long memberID) {
         List<AccountTransactionDto> accountTransactionsArray = new ArrayList<>();
@@ -62,13 +60,4 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
         }
     }
 
-    /*@Override
-    public AccountTransactionDto removeAccountTransactionByID(Integer accountTransID){
-        try{
-            AccountTransaction accountTransaction = accountTransactionRepository.findAll().get(accountTransID);
-            return new AccountTransactionDto(accountTransaction);
-        }catch (Exception e){
-            throw new RuntimeException("Unable to delete from DB!");
-        }
-    }*/
 }

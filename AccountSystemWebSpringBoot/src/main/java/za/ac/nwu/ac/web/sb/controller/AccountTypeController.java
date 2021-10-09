@@ -9,14 +9,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import za.ac.nwu.ac.domain.service.GeneralResponse;
 import za.ac.nwu.ac.domain.dto.AccountTypeDto;
+import za.ac.nwu.ac.domain.service.GeneralResponse;
 import za.ac.nwu.ac.logic.flow.CreateAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.ModifyAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.RemoveAccountTypeFlow;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -68,7 +67,7 @@ public class AccountTypeController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("{mnemonic}")
+    @GetMapping("getAccountTypeBy/{mnemonic}")
     @ApiOperation(value = "Gets Specific account type", notes = "Fetches account type by Mnemonic")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account type Found"),
@@ -100,19 +99,19 @@ public class AccountTypeController {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
-    /*@DeleteMapping("/removeAccountType/{id}")
+    @DeleteMapping("/removeAccountTypeBy/{accountTypeID}")
     @ApiOperation(value = "Deletes Account type",notes = "Deletes an account type")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account type Deleted",response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 404, message = "Not found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
-    public ResponseEntity<GeneralResponse<AccountTypeDto>> removeAccount(
-            @PathVariable("id") final Integer accountTypeID){
-        AccountTypeDto accountTypeDto = removeAccountTypeFlow.removeAccountTypeByID(accountTypeID);
-        GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountTypeDto);
+    public ResponseEntity<GeneralResponse<String>> removeAccountType(
+            @PathVariable("accountTypeID") final Long accountTypeID){
+        removeAccountTypeFlow.removeAccountTypeByID(accountTypeID);
+        GeneralResponse<String> response = new GeneralResponse<>(true, "Removed");
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }*/
+    }
 
 
 }

@@ -1,7 +1,6 @@
 package za.ac.nwu.ac.web.sb.controller;
 
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
-import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
 import za.ac.nwu.ac.logic.flow.CreateAccountTransactionFlow;
 import za.ac.nwu.ac.logic.flow.FetchAccountTransactionFlow;
-import za.ac.nwu.ac.logic.flow.RemoveAccountTransactionFlow;
-import za.ac.nwu.ac.logic.flow.RemoveAccountTypeFlow;
 
 import java.util.List;
 
@@ -25,15 +21,12 @@ public class AccountTransactionController {
 
     private final FetchAccountTransactionFlow fetchAccountTransactionFlow;
     private final CreateAccountTransactionFlow createAccountTransactionFlow;
-    private final RemoveAccountTransactionFlow removeAccountTransactionFlow;
 
     @Autowired
     public AccountTransactionController(FetchAccountTransactionFlow fetchAccountTransactionFlow,
-                                        @Qualifier("createAccountTransactionFlow")CreateAccountTransactionFlow createAccountTransactionFlow,
-                                        @Qualifier("removeAccountTransactionFlow")RemoveAccountTransactionFlow removeAccountTransactionFlow){
+                                        @Qualifier("createAccountTransactionFlow")CreateAccountTransactionFlow createAccountTransactionFlow){
         this.fetchAccountTransactionFlow = fetchAccountTransactionFlow;
         this.createAccountTransactionFlow=createAccountTransactionFlow;
-        this.removeAccountTransactionFlow=removeAccountTransactionFlow;
     }
 
     @GetMapping("/all")
@@ -63,7 +56,7 @@ public class AccountTransactionController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("{memberID}")
+    @GetMapping("getTransactionBy/{memberID}")
     @ApiOperation(value = "Gets Specific account transaction", notes = "Fetches account transaction by MemberID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account transaction Found"),
@@ -76,18 +69,4 @@ public class AccountTransactionController {
         GeneralResponse<List<AccountTransactionDto>> response = new GeneralResponse<>(true, accountTransactionDto);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-    /*@DeleteMapping("/removeAccountTransaction/{id}")
-    @ApiOperation(value = "Deletes Account type",notes = "Deletes an account type")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Account type Deleted",response = GeneralResponse.class),
-            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
-            @ApiResponse(code = 404, message = "Not found", response = GeneralResponse.class),
-            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
-    public ResponseEntity<GeneralResponse<AccountTransactionDto>> removeAccountTransaction(
-            @PathVariable("id") final Integer accountTransID){
-        AccountTransactionDto accountTransactionDto = removeAccountTransactionFlow.removeAccountTransactionByID(accountTransID);
-        GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransactionDto);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }*/
 }

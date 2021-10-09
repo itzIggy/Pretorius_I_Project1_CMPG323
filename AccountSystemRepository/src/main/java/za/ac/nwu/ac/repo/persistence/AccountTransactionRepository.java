@@ -1,10 +1,8 @@
 package za.ac.nwu.ac.repo.persistence;
 
-import io.swagger.annotations.ApiParam;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
 import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 
 import java.util.List;

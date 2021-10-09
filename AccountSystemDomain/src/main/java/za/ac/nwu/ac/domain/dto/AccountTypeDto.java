@@ -3,7 +3,6 @@ package za.ac.nwu.ac.domain.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import za.ac.nwu.ac.domain.persistence.AccountMember;
 import za.ac.nwu.ac.domain.persistence.AccountType;
 
 import java.io.Serializable;
