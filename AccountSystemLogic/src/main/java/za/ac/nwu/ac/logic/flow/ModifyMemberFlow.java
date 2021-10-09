@@ -8,5 +8,5 @@ public interface ModifyMemberFlow {
 
     AccountMemberDto addCurrencyToBalance(Long memberID, double balance);
 
-    AccountMemberDto removeCurrencyToBalance(Long memberID, double balance);
+    AccountMemberDto subtractCurrencyFromBalance(Long memberID, double balance);
 }

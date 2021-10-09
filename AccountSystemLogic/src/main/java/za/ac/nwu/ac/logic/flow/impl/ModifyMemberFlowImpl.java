@@ -30,7 +30,7 @@ public class ModifyMemberFlowImpl implements ModifyMemberFlow {
     }
 
     @Override
-    public AccountMemberDto removeCurrencyToBalance(Long memberID, double balance){
-        return  accountMemberTranslator.removeCurrencyToBalance(memberID,balance);
+    public AccountMemberDto subtractCurrencyFromBalance(Long memberID, double balance){
+        return  accountMemberTranslator.subtractCurrencyFromBalance(memberID,balance);
     }
 }

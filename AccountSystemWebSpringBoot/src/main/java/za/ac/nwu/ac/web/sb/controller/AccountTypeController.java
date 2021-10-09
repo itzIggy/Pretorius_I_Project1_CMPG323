@@ -53,7 +53,7 @@ public class AccountTypeController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/createAccountTypes")
+    @PostMapping("/createAccountType")
     @ApiOperation(value="Creates new Account Type",notes = "Create a new Account type in DB")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Account Type Created Successfully", response = GeneralResponse.class),
@@ -85,7 +85,7 @@ public class AccountTypeController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("/modifyAccountType")
+    @PutMapping("/editAccountType")
     @ApiOperation(value = "Modifies Account type",notes = "Modifies an account type")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account type Found",response = GeneralResponse.class),

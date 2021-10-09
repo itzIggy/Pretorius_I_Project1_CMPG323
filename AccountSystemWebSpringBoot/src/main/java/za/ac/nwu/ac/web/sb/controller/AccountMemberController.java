@@ -77,7 +77,7 @@ public class AccountMemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("/modifyAccountMember")
+    @PutMapping("/editAccountMember")
     @ApiOperation(value = "Modifies Account Member",notes = "Modifies an account member")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account member Found",response = GeneralResponse.class),
@@ -116,7 +116,7 @@ public class AccountMemberController {
     public ResponseEntity<GeneralResponse<AccountMemberDto>> subtractFromBalance(
             @PathVariable("memberID") Long memberID,
             @PathVariable("balance") double balance){
-        AccountMemberDto accountMemberDto = modifyMemberFlow.removeCurrencyToBalance(memberID,balance);
+        AccountMemberDto accountMemberDto = modifyMemberFlow.subtractCurrencyFromBalance(memberID,balance);
         GeneralResponse<AccountMemberDto> response = new GeneralResponse<>(true,accountMemberDto);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }

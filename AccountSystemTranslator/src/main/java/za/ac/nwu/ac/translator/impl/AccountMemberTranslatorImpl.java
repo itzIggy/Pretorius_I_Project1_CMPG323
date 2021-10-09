@@ -92,7 +92,7 @@ public class AccountMemberTranslatorImpl implements AccountMemberTranslator {
     }
 
     @Override
-    public AccountMemberDto removeCurrencyToBalance(Long memberID, double balance) {
+    public AccountMemberDto subtractCurrencyFromBalance(Long memberID, double balance) {
         try{
             AccountMember accountMember = accountMemberRepository.getAccountMemberByID(memberID);
 
