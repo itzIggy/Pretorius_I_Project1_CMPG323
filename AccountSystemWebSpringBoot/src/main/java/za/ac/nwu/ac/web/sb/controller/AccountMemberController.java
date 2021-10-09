@@ -78,6 +78,7 @@ public class AccountMemberController {
     }
 
     @PutMapping("/editAccountMember")
+
     @ApiOperation(value = "Modifies Account Member",notes = "Modifies an account member")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account member Found",response = GeneralResponse.class),
