@@ -15,7 +15,7 @@ public interface AccountMemberRepository extends JpaRepository<AccountMember, Lo
             "        AccountMember" +
             "        at                " +
             "WHERE at.memberID = :memberID" )
-    List<AccountMember> getAccountMemberByMemberID(Long memberID);
+    List<AccountMember> getAccountMemberByMemberID(Long memberID); //USED FOR GETTING MEMBER IN CONTROLLER
 
     @Query(value = "SELECT             " +
             "        at           " +
@@ -23,5 +23,5 @@ public interface AccountMemberRepository extends JpaRepository<AccountMember, Lo
             "        AccountMember" +
             "        at                " +
             "WHERE at.memberID = :memberID" )
-    AccountMember getAccountMemberByID(Long memberID);
+    AccountMember getAccountMemberByID(Long memberID); //USED FOR ADDING AND SUBTRACTING CURRENCY
 }
