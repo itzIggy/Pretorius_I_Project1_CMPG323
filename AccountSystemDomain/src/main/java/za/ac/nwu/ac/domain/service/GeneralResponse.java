@@ -22,13 +22,9 @@ public class GeneralResponse<T> implements Serializable {
         return successful;
     }
 
-    public void setSuccessful(boolean successful){this.successful=successful;}
-
     public T getPayload() {
         return payload;
     }
-
-    public void setPayload(T payload){this.payload = payload;}
 
     @Override
     public boolean equals(Object o) {

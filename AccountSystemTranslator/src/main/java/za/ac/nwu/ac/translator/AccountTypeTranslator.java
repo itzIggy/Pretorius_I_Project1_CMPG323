@@ -6,6 +6,7 @@ import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.domain.persistence.AccountType;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AccountTypeTranslator {
     List<AccountTypeDto> getAllAccountTypes();
@@ -14,7 +15,7 @@ public interface AccountTypeTranslator {
 
     AccountTypeDto getAccountTypeByMnemonic(String mnemonic);
 
-    /*AccountTypeDto modifyAccountType(AccountTypeDto accountTypeDto);*/
+    AccountTypeDto modifyAccountType(AccountTypeDto accountTypeDto);
 
-    /*AccountType removeAccountTypeByMnemonic(String mnemonic);*/
+    /*AccountTypeDto removeAccountTypeByID(Integer accountTypeID);*/
 }

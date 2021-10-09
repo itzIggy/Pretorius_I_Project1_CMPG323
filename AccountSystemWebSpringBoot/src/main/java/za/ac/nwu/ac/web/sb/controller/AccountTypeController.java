@@ -14,7 +14,9 @@ import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.logic.flow.CreateAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.ModifyAccountTypeFlow;
+import za.ac.nwu.ac.logic.flow.RemoveAccountTypeFlow;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,11 +26,14 @@ public class AccountTypeController {
     private final FetchAccountTypeFlow fetchAccountTypeFlow;
     private final CreateAccountTypeFlow createAccountTypeFlow;
     private final ModifyAccountTypeFlow modifyAccountTypeFlow;
+    private final RemoveAccountTypeFlow removeAccountTypeFlow;
 
     @Autowired
     public AccountTypeController(FetchAccountTypeFlow fetchAccountTypeFlow,
                                  @Qualifier("createAccountTypeFlowName") CreateAccountTypeFlow createAccountTypeFlow,
-                                 ModifyAccountTypeFlow modifyAccountTypeFlow) {
+                                 @Qualifier("modifyAccountTypeFlow") ModifyAccountTypeFlow modifyAccountTypeFlow,
+                                 @Qualifier("removeAccountTypeFlow")RemoveAccountTypeFlow removeAccountTypeFlow) {
+        this.removeAccountTypeFlow =removeAccountTypeFlow;
         this.fetchAccountTypeFlow = fetchAccountTypeFlow;
         this.createAccountTypeFlow = createAccountTypeFlow;
         this.modifyAccountTypeFlow = modifyAccountTypeFlow;
@@ -81,19 +86,32 @@ public class AccountTypeController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    /*@PutMapping("/modifyAccountType")
+    @PutMapping("/modifyAccountType")
     @ApiOperation(value = "Modifies Account type",notes = "Modifies an account type")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account type Found",response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 404, message = "Not found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
-    public ResponseEntity<GeneralResponse<AccountTypeDto>> modifyAccount(
-            @ApiParam(value = "Request to modify account type", required = true)
+    public ResponseEntity<GeneralResponse<AccountTypeDto>> modifyAccountType(
             @RequestBody AccountTypeDto accountType){
         AccountTypeDto accountTypeDto = modifyAccountTypeFlow.modifyAccountType(accountType);
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true,accountTypeDto);
         return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    /*@DeleteMapping("/removeAccountType/{id}")
+    @ApiOperation(value = "Deletes Account type",notes = "Deletes an account type")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Account type Deleted",response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Not found", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
+    public ResponseEntity<GeneralResponse<AccountTypeDto>> removeAccount(
+            @PathVariable("id") final Integer accountTypeID){
+        AccountTypeDto accountTypeDto = removeAccountTypeFlow.removeAccountTypeByID(accountTypeID);
+        GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountTypeDto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }*/
 
 

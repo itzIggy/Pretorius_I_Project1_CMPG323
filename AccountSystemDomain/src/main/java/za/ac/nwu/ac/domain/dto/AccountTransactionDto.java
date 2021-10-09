@@ -67,15 +67,16 @@ public class AccountTransactionDto implements Serializable {
     public void setTransDate(LocalDate transDate) {
         this.transDate = transDate;
     }
-
+    @ApiModelProperty(position = 3)
     public AccountType getAccountType() {
         return accountType;
     }
 
+
     public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
     }
-
+    @ApiModelProperty(position = 4)
     public AccountMember getAccountMember() {
         return accountMember;
     }

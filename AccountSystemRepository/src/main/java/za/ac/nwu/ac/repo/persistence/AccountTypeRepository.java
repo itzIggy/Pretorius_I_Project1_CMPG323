@@ -19,8 +19,8 @@ public interface AccountTypeRepository extends JpaRepository<AccountType, Long> 
 
     /*@Query(value = "UPDATE      " +
             "        AccountType        " +
-            "SET AccountType.mnemonic = :mnemonic, AccountType.accountTypeName = :accountTypeName, AccountType.creationDate = :creationDate")
-    AccountType modifyAccountType(@ApiParam("mnemonic") AccountTypeDto accountTypeDto);*/
+            "SET  AccountType.accountTypeId = :accountTypeId,AccountType.mnemonic = :mnemonic, AccountType.accountTypeName = :accountTypeName, AccountType.creationDate = :creationDate")
+    AccountType modifyAccountType(@ApiParam("accountTypeID") AccountTypeDto accountTypeDto);*/
 
     /*@Query(value = "DELETE FROM AccountType WHERE AccountType.mnemonic = :mnemonic")
     AccountType removeAccountTypeByMnemonic(String mnemonic);*/

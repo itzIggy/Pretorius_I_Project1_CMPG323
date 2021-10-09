@@ -14,6 +14,8 @@ import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
 import za.ac.nwu.ac.logic.flow.CreateAccountTransactionFlow;
 import za.ac.nwu.ac.logic.flow.FetchAccountTransactionFlow;
+import za.ac.nwu.ac.logic.flow.RemoveAccountTransactionFlow;
+import za.ac.nwu.ac.logic.flow.RemoveAccountTypeFlow;
 
 import java.util.List;
 
@@ -23,12 +25,15 @@ public class AccountTransactionController {
 
     private final FetchAccountTransactionFlow fetchAccountTransactionFlow;
     private final CreateAccountTransactionFlow createAccountTransactionFlow;
+    private final RemoveAccountTransactionFlow removeAccountTransactionFlow;
 
     @Autowired
     public AccountTransactionController(FetchAccountTransactionFlow fetchAccountTransactionFlow,
-                                        @Qualifier("createAccountTransactionFlow")CreateAccountTransactionFlow createAccountTransactionFlow){
+                                        @Qualifier("createAccountTransactionFlow")CreateAccountTransactionFlow createAccountTransactionFlow,
+                                        @Qualifier("removeAccountTransactionFlow")RemoveAccountTransactionFlow removeAccountTransactionFlow){
         this.fetchAccountTransactionFlow = fetchAccountTransactionFlow;
         this.createAccountTransactionFlow=createAccountTransactionFlow;
+        this.removeAccountTransactionFlow=removeAccountTransactionFlow;
     }
 
     @GetMapping("/all")
@@ -52,27 +57,36 @@ public class AccountTransactionController {
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Server Error", response = GeneralResponse.class)})
     public ResponseEntity<GeneralResponse<AccountTransactionDto>> createTransaction(
-            @ApiParam(value = "Request to create new account transaction", required = true)
             @RequestBody AccountTransactionDto accountTransactionDto){
         AccountTransactionDto accountTransactionResponse = createAccountTransactionFlow.createTransaction(accountTransactionDto);
         GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true,accountTransactionResponse);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    /*@GetMapping("{memberID}")
+    @GetMapping("{memberID}")
     @ApiOperation(value = "Gets Specific account transaction", notes = "Fetches account transaction by MemberID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account transaction Found"),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 404, message = "Not found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
-    public ResponseEntity<GeneralResponse<AccountTransactionDto>> getAccountMemberID(
-            @ApiParam(value = "MemberID that Identifies account transaction.",
-                    example = "1",
-                    name = "memberID",
-                    required = true)
+    public ResponseEntity<GeneralResponse<List<AccountTransactionDto>>> getAccountMemberID(
             @PathVariable("memberID") final Long memberID) {
-        AccountTransactionDto accountTransactionDto = fetchAccountTransactionFlow.getAccountTransactionByMemberID(memberID);
+        List<AccountTransactionDto> accountTransactionDto = fetchAccountTransactionFlow.getAccountTransactionByMemberID(memberID);
+        GeneralResponse<List<AccountTransactionDto>> response = new GeneralResponse<>(true, accountTransactionDto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /*@DeleteMapping("/removeAccountTransaction/{id}")
+    @ApiOperation(value = "Deletes Account type",notes = "Deletes an account type")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Account type Deleted",response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Not found", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
+    public ResponseEntity<GeneralResponse<AccountTransactionDto>> removeAccountTransaction(
+            @PathVariable("id") final Integer accountTransID){
+        AccountTransactionDto accountTransactionDto = removeAccountTransactionFlow.removeAccountTransactionByID(accountTransID);
         GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransactionDto);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }*/

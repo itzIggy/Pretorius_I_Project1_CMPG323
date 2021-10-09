@@ -10,6 +10,7 @@ import za.ac.nwu.ac.translator.AccountTypeTranslator;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Transactional
@@ -58,20 +59,20 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator{
         }
     }
 
-   /* @Override
+    @Override
     public AccountTypeDto modifyAccountType(AccountTypeDto accountTypeDto) {
         try{
-            AccountType accountType = accountTypeRepository.modifyAccountType(accountTypeDto);
+            AccountType accountType =accountTypeRepository.save(accountTypeDto.getAccountType());
             return new AccountTypeDto(accountType);
         }catch (Exception e){
-            throw new RuntimeException("Unable to read from DB");
+            throw new RuntimeException("Unable to save to DB");
         }
-    }*/
+    }
 
-   /* @Override
-    public AccountType removeAccountTypeByMnemonic(String mnemonic){
+    /*@Override
+    public AccountTypeDto removeAccountTypeByID(Integer accountTypeID){
         try{
-            AccountType accountType = accountTypeRepository;
+            AccountType accountType = accountTypeRepository.deleteById(accountTypeID);
             return new AccountTypeDto(accountType);
         }catch (Exception e){
             throw new RuntimeException("Unable to delete from DB!");
