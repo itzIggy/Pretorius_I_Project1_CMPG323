@@ -32,7 +32,7 @@
             <artifactId>jackson-annotations</artifactId>
         </dependency>
     </dependencies>
-
+<!--
     <build>
         <plugins>
             <plugin>
@@ -40,5 +40,5 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 </project>

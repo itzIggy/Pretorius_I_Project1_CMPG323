@@ -1,4 +1,7 @@
-C:\Users\chris\IdeaProjects\AccountSystem\AccountSystemDomain\src\main\java\za\ac\nwu\ac\domain\dto\AccountTypeDto.java
-C:\Users\chris\IdeaProjects\AccountSystem\AccountSystemDomain\src\main\java\za\ac\nwu\ac\domain\persistence\AccountTransaction.java
-C:\Users\chris\IdeaProjects\AccountSystem\AccountSystemDomain\src\main\java\za\ac\nwu\ac\domain\persistence\AccountType.java
-C:\Users\chris\IdeaProjects\AccountSystem\AccountSystemDomain\src\main\java\za\ac\nwu\ac\domain\service\GeneralResponse.java
+C:\AccountSystemCMPG323\CMPG323Project1\AccountSystemDomain\src\main\java\za\ac\nwu\ac\domain\persistence\AccountType.java
+C:\AccountSystemCMPG323\CMPG323Project1\AccountSystemDomain\src\main\java\za\ac\nwu\ac\domain\dto\AccountTransactionDto.java
+C:\AccountSystemCMPG323\CMPG323Project1\AccountSystemDomain\src\main\java\za\ac\nwu\ac\domain\persistence\AccountMember.java
+C:\AccountSystemCMPG323\CMPG323Project1\AccountSystemDomain\src\main\java\za\ac\nwu\ac\domain\dto\AccountMemberDto.java
+C:\AccountSystemCMPG323\CMPG323Project1\AccountSystemDomain\src\main\java\za\ac\nwu\ac\domain\dto\AccountTypeDto.java
+C:\AccountSystemCMPG323\CMPG323Project1\AccountSystemDomain\src\main\java\za\ac\nwu\ac\domain\service\GeneralResponse.java
+C:\AccountSystemCMPG323\CMPG323Project1\AccountSystemDomain\src\main\java\za\ac\nwu\ac\domain\persistence\AccountTransaction.java
