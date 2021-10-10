@@ -7,6 +7,7 @@ import za.ac.nwu.ac.logic.flow.ModifyAccountTypeFlow;
 import za.ac.nwu.ac.translator.AccountTypeTranslator;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 
 @Transactional
 @Component(value = "modifyAccountTypeFlow")
@@ -21,8 +22,8 @@ public class ModifyAccountTypeFlowImpl implements ModifyAccountTypeFlow {
 
 
     @Override
-    public AccountTypeDto modifyAccountType(AccountTypeDto accountTypeDto){
-        return accountTypeTranslator.modifyAccountType(accountTypeDto);
+    public AccountTypeDto modifyAccountType(String mnemonic, String accountName, LocalDate newDate){
+        return accountTypeTranslator.modifyAccountType(mnemonic,accountName,newDate);
     }
 
 }

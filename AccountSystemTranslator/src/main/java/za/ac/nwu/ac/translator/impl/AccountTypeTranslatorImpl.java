@@ -1,5 +1,6 @@
 package za.ac.nwu.ac.translator.impl;
 
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.ac.domain.dto.AccountTypeDto;
@@ -8,6 +9,7 @@ import za.ac.nwu.ac.repo.persistence.AccountTypeRepository;
 import za.ac.nwu.ac.translator.AccountTypeTranslator;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,10 +61,24 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator{
     }
 
     @Override
-    public AccountTypeDto modifyAccountType(AccountTypeDto accountTypeDto) {
+    public AccountTypeDto modifyAccountType(String mnemonic, String accountName, LocalDate newDate) {
         try{
-            AccountType accountType =accountTypeRepository.save(accountTypeDto.getAccountType());
-            return new AccountTypeDto(accountType);
+            AccountType accountType  = accountTypeRepository.getAccountTypeByMnemonic(mnemonic);
+
+            if( newDate != null)
+            {
+                accountType.setCreationDate(newDate);
+            }
+            else
+            {
+                accountType.setCreationDate(LocalDate.now());
+            }
+
+            AccountType newAccountType = accountTypeRepository.save(accountType);
+
+
+            return new AccountTypeDto(newAccountType);
+
         }catch (Exception e){
             throw new RuntimeException("Unable to save to DB");
         }

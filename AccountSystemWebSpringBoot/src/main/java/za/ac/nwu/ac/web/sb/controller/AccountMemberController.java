@@ -92,7 +92,7 @@ public class AccountMemberController {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
-    @PutMapping("/addToBalance/{memberID}/{balance}")
+    @PutMapping("/addToBalance/{memberID}/{balance}/{Optional}")
     @ApiOperation(value = "Add Currency to Member balance",notes = "Adds to Balance")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account member balance updated",response = GeneralResponse.class),
@@ -101,8 +101,10 @@ public class AccountMemberController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
     public ResponseEntity<GeneralResponse<AccountMemberDto>> addCurrencyToBalance(
             @PathVariable("memberID") Long memberID,
-            @PathVariable("balance") double balance){
-        AccountMemberDto accountMemberDto = modifyMemberFlow.addCurrencyToBalance(memberID,balance);
+            @PathVariable("balance") double balance,
+            @ApiParam(required = false)
+            @PathVariable("Optional") Integer optional){
+        AccountMemberDto accountMemberDto = modifyMemberFlow.addCurrencyToBalance(memberID,balance,optional);
         GeneralResponse<AccountMemberDto> response = new GeneralResponse<>(true,accountMemberDto);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }

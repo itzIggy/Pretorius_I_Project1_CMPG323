@@ -25,8 +25,8 @@ public class ModifyMemberFlowImpl implements ModifyMemberFlow {
     }
 
     @Override
-    public AccountMemberDto addCurrencyToBalance(Long memberID, double balance){
-        return  accountMemberTranslator.addCurrencyToBalance(memberID,balance);
+    public AccountMemberDto addCurrencyToBalance(Long memberID, double balance, Integer optional){
+        return  accountMemberTranslator.addCurrencyToBalance(memberID,balance,optional);
     }
 
     @Override

@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.ModifyAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.RemoveAccountTypeFlow;
 
+import java.text.Format;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -85,7 +88,7 @@ public class AccountTypeController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("/editAccountType")
+    @PutMapping("/editAccountType/{mnemonic}/{accountTypeName}/{newDate}")
     @ApiOperation(value = "Modifies Account type",notes = "Modifies an account type")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account type Found",response = GeneralResponse.class),
@@ -93,8 +96,12 @@ public class AccountTypeController {
             @ApiResponse(code = 404, message = "Not found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
     public ResponseEntity<GeneralResponse<AccountTypeDto>> modifyAccountType(
-            @RequestBody AccountTypeDto accountType){
-        AccountTypeDto accountTypeDto = modifyAccountTypeFlow.modifyAccountType(accountType);
+            @PathVariable("mnemonic") String mnemonic,
+            @PathVariable("accountTypeName") String accountName,
+            @ApiParam(required = false)
+            @PathVariable(value = "newDate")
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate NewCreationDate) {
+        AccountTypeDto accountTypeDto = modifyAccountTypeFlow.modifyAccountType(mnemonic,accountName,NewCreationDate);
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true,accountTypeDto);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }

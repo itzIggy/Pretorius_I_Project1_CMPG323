@@ -14,7 +14,7 @@ public interface AccountMemberTranslator {
 
     AccountMemberDto modifyAccountMember(AccountMemberDto accountMemberDto);
 
-    AccountMemberDto addCurrencyToBalance(Long memberID, double balance);
+    AccountMemberDto addCurrencyToBalance(Long memberID, double balance, Integer optional);
 
     AccountMemberDto subtractCurrencyFromBalance(Long memberID, double balance);
 

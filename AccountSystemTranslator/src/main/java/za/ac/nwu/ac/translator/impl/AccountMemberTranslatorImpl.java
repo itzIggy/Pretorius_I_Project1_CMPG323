@@ -74,7 +74,7 @@ public class AccountMemberTranslatorImpl implements AccountMemberTranslator {
     }
 
     @Override
-    public AccountMemberDto addCurrencyToBalance(Long memberID, double balance) {
+    public AccountMemberDto addCurrencyToBalance(Long memberID, double balance, Integer optional) {
         try{
             AccountMember accountMember = accountMemberRepository.getAccountMemberByID(memberID);
 
@@ -83,6 +83,11 @@ public class AccountMemberTranslatorImpl implements AccountMemberTranslator {
             accountMember.setMemberBalance(updateBalance);
 
             AccountMember newAccountMember = accountMemberRepository.save(accountMember);
+
+            if(optional == 1)
+            {
+                throw new RuntimeException("Runtime Exception");
+            }
 
             return new AccountMemberDto(newAccountMember);
         } catch (Exception e){
