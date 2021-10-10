@@ -6,6 +6,8 @@ import za.ac.nwu.ac.domain.dto.AccountMemberDto;
 import za.ac.nwu.ac.domain.persistence.AccountMember;
 import za.ac.nwu.ac.repo.persistence.AccountMemberRepository;
 import za.ac.nwu.ac.translator.AccountMemberTranslator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import java.util.List;
 public class AccountMemberTranslatorImpl implements AccountMemberTranslator {
 
     private final AccountMemberRepository accountMemberRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountMemberTranslatorImpl.class);
 
     @Autowired
     public AccountMemberTranslatorImpl(AccountMemberRepository accountMemberRepository){

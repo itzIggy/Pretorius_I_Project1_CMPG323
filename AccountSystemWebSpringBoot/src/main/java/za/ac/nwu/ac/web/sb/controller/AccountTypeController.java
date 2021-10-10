@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,6 +31,7 @@ public class AccountTypeController {
     private final CreateAccountTypeFlow createAccountTypeFlow;
     private final ModifyAccountTypeFlow modifyAccountTypeFlow;
     private final RemoveAccountTypeFlow removeAccountTypeFlow;
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountTypeController.class);
 
     @Autowired
     public AccountTypeController(FetchAccountTypeFlow fetchAccountTypeFlow,
@@ -51,6 +54,7 @@ public class AccountTypeController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
 
     public ResponseEntity<GeneralResponse<List<AccountTypeDto>>> getAll(){
+        LOGGER.info("Executing Logging for getAllAccountTypes");
         List<AccountTypeDto> accountTypes = fetchAccountTypeFlow.getAllAccountTypes();
         GeneralResponse<List<AccountTypeDto>> response = new GeneralResponse<>(true,accountTypes);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -65,6 +69,7 @@ public class AccountTypeController {
     public ResponseEntity<GeneralResponse<AccountTypeDto>> create(
             @ApiParam(value = "Request to create new account type", required = true)
             @RequestBody AccountTypeDto accountType) {
+        LOGGER.info("Executing Logging for createAccountType");
         AccountTypeDto accountTypeResponse = createAccountTypeFlow.createAccountType(accountType);
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountTypeResponse);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -83,6 +88,7 @@ public class AccountTypeController {
                     name = "mnemonic",
                     required = true)
             @PathVariable("mnemonic") final String mnemonic) {
+        LOGGER.info("Executing Logging for getAccountTypeByMnemonic");
         AccountTypeDto accountTypeDto = fetchAccountTypeFlow.getAccountTypeByMnemonic(mnemonic);
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountTypeDto);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -115,6 +121,7 @@ public class AccountTypeController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
     public ResponseEntity<GeneralResponse<String>> removeAccountType(
             @PathVariable("accountTypeID") final Long accountTypeID){
+        LOGGER.info("Executing Logging for removeAccountType");
         removeAccountTypeFlow.removeAccountTypeByID(accountTypeID);
         GeneralResponse<String> response = new GeneralResponse<>(true, "Removed");
         return new ResponseEntity<>(response, HttpStatus.OK);

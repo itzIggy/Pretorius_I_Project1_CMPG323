@@ -7,6 +7,8 @@ import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.domain.persistence.AccountType;
 import za.ac.nwu.ac.repo.persistence.AccountTypeRepository;
 import za.ac.nwu.ac.translator.AccountTypeTranslator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -18,6 +20,7 @@ import java.util.List;
 public class AccountTypeTranslatorImpl implements AccountTypeTranslator{
 
     private final AccountTypeRepository accountTypeRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountTypeTranslatorImpl.class);
 
     @Autowired
     public AccountTypeTranslatorImpl(AccountTypeRepository accountTypeRepository) {
@@ -34,6 +37,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator{
             }
         } catch (Exception e){
 
+            LOGGER.error("error for getAllAccountTypes");
             throw new RuntimeException("Unable to read from the DB", e);
         }
 
@@ -46,6 +50,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator{
             AccountType accountType =accountTypeRepository.save(accountTypeDto.getAccountType());
             return new AccountTypeDto(accountType);
         }catch (Exception e){
+            LOGGER.error("error for creatingAccountType");
             throw new RuntimeException("Unable to save to DB");
         }
     }
@@ -56,6 +61,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator{
             AccountType accountType = accountTypeRepository.getAccountTypeByMnemonic(mnemonic);
             return new AccountTypeDto(accountType);
         }catch (Exception e){
+            LOGGER.error("error for getAccountTypeByMnemonic");
             throw new RuntimeException("Unable to read from DB");
         }
     }
@@ -80,6 +86,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator{
             return new AccountTypeDto(newAccountType);
 
         }catch (Exception e){
+            LOGGER.error("error for modifyingAccountTypes");
             throw new RuntimeException("Unable to save to DB");
         }
     }
@@ -89,6 +96,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator{
         try{
             accountTypeRepository.deleteById(accountTypeID);
         }catch (Exception e){
+            LOGGER.error("error for removingAccountTypes");
             throw new RuntimeException("Unable to delete from DB!");
         }
     }
