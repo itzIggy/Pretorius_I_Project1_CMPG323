@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountTypeController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AccountSystemWebSpringBoot</a> &gt; <a href="index.source.html" class="el_package">za.ac.nwu.ac.web.sb.controller</a> &gt; <span class="el_source">AccountTypeController.java</span></div><h1>AccountTypeController.java</h1><pre class="source lang-java linenums">package za.ac.nwu.ac.web.sb.controller;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import za.ac.nwu.ac.domain.dto.AccountTypeDto;
+import za.ac.nwu.ac.domain.service.GeneralResponse;
+import za.ac.nwu.ac.logic.flow.CreateAccountTypeFlow;
+import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
+import za.ac.nwu.ac.logic.flow.ModifyAccountTypeFlow;
+import za.ac.nwu.ac.logic.flow.RemoveAccountTypeFlow;
+
+import java.text.Format;
+import java.time.LocalDate;
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;account-type&quot;)
+public class AccountTypeController {
+
+    private final FetchAccountTypeFlow fetchAccountTypeFlow;
+    private final CreateAccountTypeFlow createAccountTypeFlow;
+    private final ModifyAccountTypeFlow modifyAccountTypeFlow;
+    private final RemoveAccountTypeFlow removeAccountTypeFlow;
+
+    @Autowired
+    public AccountTypeController(FetchAccountTypeFlow fetchAccountTypeFlow,
+                                 @Qualifier(&quot;createAccountTypeFlowName&quot;) CreateAccountTypeFlow createAccountTypeFlow,
+                                 @Qualifier(&quot;modifyAccountTypeFlow&quot;) ModifyAccountTypeFlow modifyAccountTypeFlow,
+<span class="fc" id="L37">                                 @Qualifier(&quot;removeAccountTypeFlow&quot;)RemoveAccountTypeFlow removeAccountTypeFlow) {</span>
+<span class="fc" id="L38">        this.removeAccountTypeFlow =removeAccountTypeFlow;</span>
+<span class="fc" id="L39">        this.fetchAccountTypeFlow = fetchAccountTypeFlow;</span>
+<span class="fc" id="L40">        this.createAccountTypeFlow = createAccountTypeFlow;</span>
+<span class="fc" id="L41">        this.modifyAccountTypeFlow = modifyAccountTypeFlow;</span>
+<span class="fc" id="L42">    }</span>
+
+
+    @GetMapping(&quot;/all&quot;)
+    @ApiOperation(value = &quot;Gets all the configured Account types.&quot;, notes = &quot;Returns a list of account types&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = &quot;The Ping was received and echoed&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = &quot;Bad Request&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = &quot;Not found&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = &quot;Internal Server Error&quot;, response = GeneralResponse.class)})
+
+    public ResponseEntity&lt;GeneralResponse&lt;List&lt;AccountTypeDto&gt;&gt;&gt; getAll(){
+<span class="fc" id="L54">        List&lt;AccountTypeDto&gt; accountTypes = fetchAccountTypeFlow.getAllAccountTypes();</span>
+<span class="fc" id="L55">        GeneralResponse&lt;List&lt;AccountTypeDto&gt;&gt; response = new GeneralResponse&lt;&gt;(true,accountTypes);</span>
+<span class="fc" id="L56">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+    }
+
+    @PostMapping(&quot;/createAccountType&quot;)
+    @ApiOperation(value=&quot;Creates new Account Type&quot;,notes = &quot;Create a new Account type in DB&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = &quot;Account Type Created Successfully&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = &quot;Bad Request&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = &quot;Server Error&quot;, response = GeneralResponse.class)})
+    public ResponseEntity&lt;GeneralResponse&lt;AccountTypeDto&gt;&gt; create(
+            @ApiParam(value = &quot;Request to create new account type&quot;, required = true)
+            @RequestBody AccountTypeDto accountType) {
+<span class="fc" id="L68">        AccountTypeDto accountTypeResponse = createAccountTypeFlow.createAccountType(accountType);</span>
+<span class="fc" id="L69">        GeneralResponse&lt;AccountTypeDto&gt; response = new GeneralResponse&lt;&gt;(true, accountTypeResponse);</span>
+<span class="fc" id="L70">        return new ResponseEntity&lt;&gt;(response, HttpStatus.CREATED);</span>
+    }
+
+    @GetMapping(&quot;getAccountTypeBy/{mnemonic}&quot;)
+    @ApiOperation(value = &quot;Gets Specific account type&quot;, notes = &quot;Fetches account type by Mnemonic&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = &quot;Account type Found&quot;),
+            @ApiResponse(code = 400, message = &quot;Bad Request&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = &quot;Not found&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = &quot;Internal Server Error&quot;, response = GeneralResponse.class)})
+    public ResponseEntity&lt;GeneralResponse&lt;AccountTypeDto&gt;&gt; getAccountMnemonic(
+            @ApiParam(value = &quot;Mnemonic that Identifies account type.&quot;,
+                    example = &quot;MILES&quot;,
+                    name = &quot;mnemonic&quot;,
+                    required = true)
+            @PathVariable(&quot;mnemonic&quot;) final String mnemonic) {
+<span class="nc" id="L86">        AccountTypeDto accountTypeDto = fetchAccountTypeFlow.getAccountTypeByMnemonic(mnemonic);</span>
+<span class="nc" id="L87">        GeneralResponse&lt;AccountTypeDto&gt; response = new GeneralResponse&lt;&gt;(true, accountTypeDto);</span>
+<span class="nc" id="L88">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+    }
+
+    @PutMapping(&quot;/editAccountType/{mnemonic}/{accountTypeName}/{newDate}&quot;)
+    @ApiOperation(value = &quot;Modifies Account type&quot;,notes = &quot;Modifies an account type&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = &quot;Account type Found&quot;,response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = &quot;Bad Request&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = &quot;Not found&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = &quot;Internal Server Error&quot;, response = GeneralResponse.class)})
+    public ResponseEntity&lt;GeneralResponse&lt;AccountTypeDto&gt;&gt; modifyAccountType(
+            @PathVariable(&quot;mnemonic&quot;) String mnemonic,
+            @PathVariable(&quot;accountTypeName&quot;) String accountName,
+            @ApiParam(required = false)
+            @PathVariable(value = &quot;newDate&quot;)
+            @DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;) LocalDate NewCreationDate) {
+<span class="nc" id="L104">        AccountTypeDto accountTypeDto = modifyAccountTypeFlow.modifyAccountType(mnemonic,accountName,NewCreationDate);</span>
+<span class="nc" id="L105">        GeneralResponse&lt;AccountTypeDto&gt; response = new GeneralResponse&lt;&gt;(true,accountTypeDto);</span>
+<span class="nc" id="L106">        return new ResponseEntity&lt;&gt;(response,HttpStatus.OK);</span>
+    }
+
+    @DeleteMapping(&quot;/removeAccountTypeBy/{accountTypeID}&quot;)
+    @ApiOperation(value = &quot;Deletes Account type&quot;,notes = &quot;Deletes an account type&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = &quot;Account type Deleted&quot;,response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = &quot;Bad Request&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = &quot;Not found&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = &quot;Internal Server Error&quot;, response = GeneralResponse.class)})
+    public ResponseEntity&lt;GeneralResponse&lt;String&gt;&gt; removeAccountType(
+            @PathVariable(&quot;accountTypeID&quot;) final Long accountTypeID){
+<span class="nc" id="L118">        removeAccountTypeFlow.removeAccountTypeByID(accountTypeID);</span>
+<span class="nc" id="L119">        GeneralResponse&lt;String&gt; response = new GeneralResponse&lt;&gt;(true, &quot;Removed&quot;);</span>
+<span class="nc" id="L120">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

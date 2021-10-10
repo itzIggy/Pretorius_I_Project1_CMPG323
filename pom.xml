@@ -24,7 +24,7 @@
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
         <swagger.version>1.5.20</swagger.version>
 
-        <haltOnFailure>true</haltOnFailure>
+        <haltOnFailure>false</haltOnFailure>
     </properties>
 
     <modules>
@@ -92,13 +92,14 @@
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>0.8.3</version>
                     <configuration>
-                        <haltOnFailure>${haltOnFailure}}</haltOnFailure>
+                        <haltOnFailure>${haltOnFailure}</haltOnFailure>
                         <rules>
                             <rule>
                                 <element>CLASS</element>
                                 <excludes>
                                     <exclude>za.ac.nwu.ac.domain.dto.*</exclude>
                                     <exclude>za.ac.nwu.ac.logic.config.LogicConfig</exclude>
+                                    <exclude>za.ac.nwu.ac.repo.config.RepositoryConfig</exclude>
                                 </excludes>
                                 <limits>
                                     <limit>
